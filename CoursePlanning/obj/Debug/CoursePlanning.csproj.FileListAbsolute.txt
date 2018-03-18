@@ -1,0 +1,17 @@
+E:\Computer Science\Code\C++\Stima\Tubes 2\Visual\CoursePlanning\CoursePlanning\obj\Debug\CoursePlanning.csprojResolveAssemblyReference.cache
+E:\Computer Science\Code\C++\Stima\Tubes 2\Visual\CoursePlanning\CoursePlanning\obj\Debug\CoursePlanning.Properties.Resources.resources
+E:\Computer Science\Code\C++\Stima\Tubes 2\Visual\CoursePlanning\CoursePlanning\obj\Debug\CoursePlanning.csproj.GenerateResource.cache
+E:\Computer Science\Code\C++\Stima\Tubes 2\Visual\CoursePlanning\CoursePlanning\obj\Debug\CoursePlanning.csproj.CoreCompileInputs.cache
+E:\Computer Science\Code\C++\Stima\Tubes 2\Visual\CoursePlanning\CoursePlanning\bin\Debug\CoursePlanning.exe.config
+E:\Computer Science\Code\C++\Stima\Tubes 2\Visual\CoursePlanning\CoursePlanning\bin\Debug\CoursePlanning.exe
+E:\Computer Science\Code\C++\Stima\Tubes 2\Visual\CoursePlanning\CoursePlanning\bin\Debug\CoursePlanning.pdb
+E:\Computer Science\Code\C++\Stima\Tubes 2\Visual\CoursePlanning\CoursePlanning\obj\Debug\CoursePlanning.exe
+E:\Computer Science\Code\C++\Stima\Tubes 2\Visual\CoursePlanning\CoursePlanning\obj\Debug\CoursePlanning.pdb
+E:\Computer Science\Code\C++\Stima\Tubes 2\Visual\CoursePlanning\CoursePlanning\bin\Debug\Microsoft.Msagl.dll
+E:\Computer Science\Code\C++\Stima\Tubes 2\Visual\CoursePlanning\CoursePlanning\bin\Debug\Microsoft.Msagl.Drawing.dll
+E:\Computer Science\Code\C++\Stima\Tubes 2\Visual\CoursePlanning\CoursePlanning\bin\Debug\Microsoft.Msagl.GraphViewerGdi.dll
+E:\Computer Science\Code\C++\Stima\Tubes 2\Visual\CoursePlanning\CoursePlanning\bin\Debug\Microsoft.Msagl.xml
+E:\Computer Science\Code\C++\Stima\Tubes 2\Visual\CoursePlanning\CoursePlanning\bin\Debug\Microsoft.Msagl.Drawing.xml
+E:\Computer Science\Code\C++\Stima\Tubes 2\Visual\CoursePlanning\CoursePlanning\bin\Debug\Microsoft.Msagl.GraphViewerGdi.xml
+E:\Computer Science\Code\C++\Stima\Tubes 2\Visual\CoursePlanning\CoursePlanning\obj\Debug\CoursePlanning.csproj.CopyComplete
+E:\Computer Science\Code\C++\Stima\Tubes 2\Visual\CoursePlanning\CoursePlanning\obj\Debug\Tubes2.Form1.resources
