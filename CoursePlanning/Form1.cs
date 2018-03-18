@@ -18,6 +18,9 @@ namespace Tubes2
             label1.Visible = false;
             button3.Visible = false;
             label3.Visible = false;
+            pictureBox2.Visible = false;
+            pictureBox3.Visible = false;
+            pictureBox4.Visible = false;
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -47,6 +50,9 @@ namespace Tubes2
             label2.Text = "";
             label1.Visible = true;
             label3.Visible = true;
+            pictureBox2.Visible = true;
+            pictureBox3.Visible = true;
+            pictureBox4.Visible = true;
         }
 
         private void label1_Click(object sender, EventArgs e)
