@@ -1,1 +1,5 @@
-Basdat,Logif.DRPL,TBFO.FisikaIA.KimiaIB.OlahRaga.BahasaInggris.PTIB.PRD1.MatematikaIA.PAR,FisikaIA.FisikaIIA,FisikaIA.Daspro,PTIB.KimiaIIB,KimiaIB.TTKI,BahasaInggris.PRD2,PRD1.MatematikaIIA,MatematikaIA.Alstrukdat,Daspro,PTIB.Matdis,MatematikaIIA.Logif,TTKI.Algeo,MatematikaIIA.Orkom,Daspro.TBFO,PRD2.Probstat,Algeo,Matdis.OOP,Alstrukdat.Stima,Alstrukdat,Matdis.OS,Orkom.
+C1,C3.
+C2,C1,C4.
+C3.
+C4,C1,C3.
+C5,C2,C4.
