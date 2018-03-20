@@ -21,14 +21,29 @@ namespace Tubes2
             pictureBox2.Visible = false;
             pictureBox3.Visible = false;
             pictureBox4.Visible = false;
+            semester.Visible = false;
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             Graph g = new Graph("./input/input.txt");
-            string ans = "";
-            g.topologicalSort(ref ans, "dfs");
-            label2.Text = "Answer with DFS = " + ans;
+            List<List<string>> sem = new List<List<string>>();
+            //Console.WriteLine("ASU EWE LONTE");
+            g.topologicalSort(ref sem, "dfs");
+            //var labels = new List<Label> { semester1, semester2, semester3, semester4, semester5 };
+            int it = 0;
+            semester.Text = "";
+            foreach (List<string> ls in sem)
+            {
+                semester.Visible = true;
+                semester.Text = semester.Text + "Semester " + (it+1)+": " + ls[0];
+                for (int i=1; i<ls.Count;i++)
+                {
+                    semester.Text = semester.Text + ", " + ls[i];
+                }
+                semester.Text = semester.Text + "\n";
+                it++;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -37,7 +52,14 @@ namespace Tubes2
             SidePanel.Top = button1.Top;
             button3.Visible = false;
             button6.Visible = true;
+            button5.Visible = true;
             label2.Text = "";
+            label1.Visible = false;
+            label3.Visible = false;
+            pictureBox2.Visible = false;
+            pictureBox3.Visible = false;
+            pictureBox4.Visible = false;
+            semester.Visible = false;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -53,6 +75,7 @@ namespace Tubes2
             pictureBox2.Visible = true;
             pictureBox3.Visible = true;
             pictureBox4.Visible = true;
+            semester.Visible = false;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -71,7 +94,14 @@ namespace Tubes2
             SidePanel.Top = button4.Top;
             button6.Visible = false;
             button3.Visible = true;
+            button5.Visible = true;
+            label1.Visible = false;
+            label3.Visible = false;
             label2.Text = "";
+            pictureBox2.Visible = false;
+            pictureBox3.Visible = false;
+            pictureBox4.Visible = false;
+            semester.Visible = false;
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -83,9 +113,21 @@ namespace Tubes2
         private void button6_Click(object sender, EventArgs e)
         {
             Graph g = new Graph("./input/input.txt");
-            string ans = "";
-            g.topologicalSort(ref ans, "bfs");
-            label2.Text = "Answer with BFS = " + ans;
+            List<List<string>> sem = new List<List<string>>();
+            g.topologicalSort(ref sem, "bfs");
+            int it = 0;
+            semester.Text = "";
+            foreach (List<string> ls in sem)
+            {
+                semester.Visible = true;
+                semester.Text = semester.Text + "Semester " + (it + 1) + ": " + ls[0];
+                for (int i = 1; i < ls.Count; i++)
+                {
+                    semester.Text = semester.Text + ", " + ls[i];
+                }
+                semester.Text = semester.Text + "\n";
+                it++;
+            }
         }
     }
 
@@ -93,22 +135,23 @@ namespace Tubes2
     {
         private Dictionary<string, HashSet<string>> graph;
         private Dictionary<string, bool> visited = new Dictionary<string, bool>();
+        private List<string>[] mat;
         private int no_of_vertex;
 
         public Graph(string file)
         {
-            // Read input.txt and store to matrix
+            /* Read input.txt and store to matrix */
             string input = System.IO.File.ReadAllText(file);
             string[] lines = input.Split('\n');
             List<string>[] matrix = new List<string>[lines.Length];
 
-            // Initialize all the list in matrix
+            /* Initialize all the list in matrix */
             for (int i = 0; i < lines.Length; i++)
             {
                 matrix[i] = new List<string>();
             }
 
-            // Add each element to list
+            /* Add each element to list */
             for (int i = 0; i < lines.Length; i++)
             {
                 string[] temp = lines[i].Remove(lines[i].Length - 1).Split(',');
@@ -118,9 +161,11 @@ namespace Tubes2
                 }
             }
 
+            mat = matrix;
+
             no_of_vertex = matrix.Length;
 
-            graph = new Dictionary<string, HashSet<string>>(); // Initialize matrix to zeros
+            graph = new Dictionary<string, HashSet<string>>(); /* Initialize matrix to zeros */
             for (int i = 0; i < no_of_vertex; i++)
             {
                 graph[matrix[i][0]] = new HashSet<string>();
@@ -129,6 +174,38 @@ namespace Tubes2
                     graph[matrix[i][0]].Add(matrix[i][j]);
                 }
             }
+        }
+
+        public void resetGraph()
+        {
+            graph = new Dictionary<string, HashSet<string>>(); /* Initialize matrix to zeros */
+            for (int i = 0; i < no_of_vertex; i++)
+            {
+                graph[mat[i][0]] = new HashSet<string>();
+                for (int j = 1; j < mat[i].Count; j++)
+                {
+                    graph[mat[i][0]].Add(mat[i][j]);
+                }
+            }
+        }
+
+        private void deleteVertex(string vertex)
+        {
+            graph.Remove(vertex);
+            foreach (KeyValuePair<string, HashSet<string>> kvp in graph)
+            {
+                kvp.Value.Remove(vertex);
+            }
+        }
+
+        private bool visitedAllPrereq(string vertex)
+        {
+            bool visitedAll = true;
+            foreach (string str in graph[vertex])
+            {
+                visitedAll = visitedAll && visited[str];
+            }
+            return visitedAll;
         }
 
         private void initializeVisited()
@@ -173,7 +250,7 @@ namespace Tubes2
             string res = "\0";
             foreach (KeyValuePair<string, HashSet<string>> kvp in graph)
             {
-                if (kvp.Value.Count == 0)
+                if (kvp.Value.Count == 0 && !visited[kvp.Key])
                 {
                     res = kvp.Key;
                     break;
@@ -218,14 +295,29 @@ namespace Tubes2
             // Start timestamp
             list.Add(Tuple.Create(timestamp, vertex));
             timestamp++;
+
+            bool found = false;
             foreach (string i in graph.Keys)
             {
                 if (isAdjacent(vertex, i) && !visited[i])
                 {
                     DFS(i, ref list, ref timestamp, ref vertexes);
+                    found = true;
                 }
             }
-            // Finished timestamp
+            if (!found)
+            {
+                foreach (string i in graph.Keys)
+                {
+                    if (!visited[i] && visitedAllPrereq(i))
+                    {
+                        DFS(i, ref list, ref timestamp, ref vertexes);
+                        break;
+                    }
+                }
+            }
+
+            /* Finished timestamp */
             list.Add(Tuple.Create(timestamp, vertex));
             timestamp++;
         }
@@ -241,10 +333,17 @@ namespace Tubes2
             //create the graph content
             foreach (KeyValuePair<string, HashSet<string>> kvp in graph)
             {
+                Boolean hasCouple = false;
                 foreach (string j in kvp.Value)
                 {
+                    hasCouple = true;
                     graf.AddEdge(j, kvp.Key);
                 }
+                if (!hasCouple)
+                {
+                    graf.AddNode(kvp.Key);
+                }
+                
             }
             viewer.Graph = graf;
             //associate the viewer with the form 
@@ -253,17 +352,24 @@ namespace Tubes2
             form.Controls.Add(viewer);
             form.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             form.StartPosition = FormStartPosition.Manual;
-            form.Location = new Point(444, 300);
-            form.Size = new Size(830, 300);
+            form.Location = new Point(444, 178);
+            form.Size = new Size(845, 300);
             form.ResumeLayout();
             form.BringToFront();
             form.Show();
         }
 
-        private void BFS(string vertex, ref List<string> list, ref List<string> vertexes)
+        private void BFS(ref List<string> list, ref List<string> vertexes)
         {
             Queue<string> q = new Queue<string>();
-            q.Enqueue(vertex);
+            foreach (KeyValuePair<string, HashSet<string>> kvp in graph)
+            {
+                if (noInEdge(kvp.Key))
+                {
+                    q.Enqueue(kvp.Key);
+                }
+            }
+            // q.Enqueue(vertex);
             while ((q.Count != 0) && !visitedAllVertex())
             {
                 string v = q.Dequeue();
@@ -284,7 +390,17 @@ namespace Tubes2
             }
         }
 
-        public void topologicalSort(ref string ans, string chooseRoute)
+        bool prereqTaken(string s, ref Dictionary<string, bool> taken)
+        {
+            bool takenAll = true;
+            foreach (string str in graph[s])
+            {
+                takenAll = takenAll && taken[str];
+            }
+            return takenAll;
+        }
+
+        public void topologicalSort(ref List<List<string>> sem, string chooseRoute)
         {
             Form form = new Form();
             //create a viewer object 
@@ -295,10 +411,17 @@ namespace Tubes2
             graf.Attr.LayerDirection = Microsoft.Msagl.Drawing.LayerDirection.LR;
             foreach (KeyValuePair<string, HashSet<string>> kvp in graph)
             {
+                Boolean hasCouple = false;
                 foreach (string j in kvp.Value)
                 {
+                    hasCouple = true;
                     graf.AddEdge(j, kvp.Key);
                 }
+                if (!hasCouple)
+                {
+                    graf.AddNode(kvp.Key);
+                }
+
             }
             viewer.Graph = graf;
             //associate the viewer with the form 
@@ -306,12 +429,11 @@ namespace Tubes2
             viewer.Dock = System.Windows.Forms.DockStyle.Fill;
             form.Controls.Add(viewer);
             form.StartPosition = FormStartPosition.Manual;
-            form.Location = new Point(444, 300);
-            form.Size = new Size(830, 300);
+            form.Location = new Point(444, 178);
+            form.Size = new Size(845, 300);
             form.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             form.ResumeLayout();
             form.Show();
-
             // Tuple of timestamp and vertex
            
             if (chooseRoute == "dfs")
@@ -326,23 +448,67 @@ namespace Tubes2
                     //form.Close();
                     graf.FindNode(vertexes[i]).Attr.FillColor = Microsoft.Msagl.Drawing.Color.Magenta;
                     form.Refresh();
-                    var t = Task.Delay(1000);
-                    t.Wait();
+                    var taskwait = Task.Delay(100);
+                    taskwait.Wait();
                 }
                 listDFS.Sort(compareTuple);
 
-                // Print all ordered
-                string temp = "";
-                HashSet<string> printed = new HashSet<string>();
-                for (int i = 0; i < listDFS.Count; i++)
+                Dictionary<string, bool> taken = new Dictionary<string, bool>();
+
+                foreach(string vertex in graph.Keys)
                 {
-                    if (!printed.Contains(listDFS[i].Item2))
+                    taken[vertex] = false;
+                }
+
+                List<string> list;
+                int num_taken = 0;
+
+                while(num_taken != no_of_vertex)
+                {
+                    Console.WriteLine("asdfasdf");
+                    list = new List<string>();
+                    int idx = 0;
+                    while (idx < listDFS.Count)
                     {
-                        printed.Add(listDFS[i].Item2);
-                        temp = temp + (listDFS[i].Item2) + " ";
+                        if(prereqTaken(listDFS[idx].Item2, ref taken) && !list.Contains(listDFS[idx].Item2))
+                        {
+                            list.Add(listDFS[idx].Item2);
+                            string temp = listDFS[idx].Item2;
+                            for(int iasdf = 0; iasdf < listDFS.Count; iasdf++)
+                            {
+                                if(listDFS[iasdf].Item2 == temp)
+                                {
+                                    listDFS.RemoveAt(iasdf);
+                                }
+                            }
+                            num_taken++;
+                        }
+                        else
+                        {
+                            idx++;
+                        }
+                        if(num_taken == no_of_vertex)
+                        {
+                            break;
+                        }
+
+
+                    }
+                    foreach(string s in list)
+                    {
+                        taken[s] = true;
+                    }
+                    sem.Add(list);
+                }
+
+                foreach(List<string> asdf in sem)
+                {
+                    Console.WriteLine("-----");
+                    foreach(string asdfa in asdf)
+                    {
+                        Console.WriteLine(asdfa);
                     }
                 }
-                ans = temp;
             }
             
             if (chooseRoute == "bfs")
@@ -350,23 +516,76 @@ namespace Tubes2
                 List<string> listBFS = new List<string>();
                 initializeVisited();
                 List<string> vertexes = new List<string>();
-                BFS(vertexNoIn(), ref listBFS, ref vertexes);
+                BFS(ref listBFS, ref vertexes);
                 for (int i = 0; i < vertexes.Count; i++)
                 {
                     //form.Close();
                     graf.FindNode(vertexes[i]).Attr.FillColor = Microsoft.Msagl.Drawing.Color.Magenta;
                     form.Refresh();
-                    var t = Task.Delay(1000);
-                    t.Wait();
+                    var taskwait = Task.Delay(100);
+                    taskwait.Wait();
+                }
+                resetGraph();
+                Dictionary<string, bool> taken = new Dictionary<string, bool>();
+
+                foreach (string str in listBFS)
+                {
+                    taken[str] = false;
                 }
 
-                // Print all Ordered
-                string temp = "";
-                for (int i = 0; i < listBFS.Count; i++)
+                List<string> list;
+                int num_taken = 0;
+                while (num_taken != no_of_vertex)
                 {
-                    temp = temp + (listBFS[i] + " ");
+                    Console.WriteLine("asdfasdf");
+                    list = new List<string>();
+                    int idx = 0;
+                    while (idx < listBFS.Count)
+                    {
+                        if (prereqTaken(listBFS[idx], ref taken) && !list.Contains(listBFS[idx]))
+                        {
+                            list.Add(listBFS[idx]);
+                            string temp = listBFS[idx];
+                            for (int iasdf = 0; iasdf < listBFS.Count; iasdf++)
+                            {
+                                if (listBFS[iasdf] == temp)
+                                {
+                                    listBFS.RemoveAt(iasdf);
+                                }
+                            }
+                            num_taken++;
+                        }
+                        else
+                        {
+                            idx++;
+                        }
+                        if (num_taken == no_of_vertex)
+                        {
+                            break;
+                        }
+
+
+                    }
+                    foreach (string s in list)
+                    {
+                        taken[s] = true;
+                    }
+                    sem.Add(list);
                 }
-                ans = temp;
+                /*while (listBFS.Count != 0)
+                {
+                    t = new List<string>();
+                    while (listBFS.Count != 0 && noInEdge(listBFS[0]))
+                    {
+                        t.Add(listBFS[0]);
+                        listBFS.RemoveAt(0);
+                    }
+                    foreach (string s in t)
+                    {
+                        deleteVertex(s);
+                    }
+                    sem.Add(t);
+                }*/
             }
         }
     }

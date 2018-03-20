@@ -44,6 +44,7 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.semester = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -61,16 +62,16 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(244, 666);
+            this.panel1.Size = new System.Drawing.Size(244, 837);
             this.panel1.TabIndex = 0;
             // 
             // SidePanel
             // 
             this.SidePanel.AccessibleName = "";
             this.SidePanel.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.SidePanel.Location = new System.Drawing.Point(0, 101);
+            this.SidePanel.Location = new System.Drawing.Point(-3, 30);
             this.SidePanel.Name = "SidePanel";
-            this.SidePanel.Size = new System.Drawing.Size(20, 87);
+            this.SidePanel.Size = new System.Drawing.Size(23, 90);
             this.SidePanel.TabIndex = 2;
             // 
             // button2
@@ -79,7 +80,7 @@
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.button2.Location = new System.Drawing.Point(0, 278);
+            this.button2.Location = new System.Drawing.Point(-3, 210);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(244, 87);
             this.button2.TabIndex = 1;
@@ -94,7 +95,7 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.button1.Location = new System.Drawing.Point(0, 101);
+            this.button1.Location = new System.Drawing.Point(-3, 33);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(244, 87);
             this.button1.TabIndex = 0;
@@ -108,7 +109,7 @@
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button4.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button4.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.button4.Location = new System.Drawing.Point(0, 185);
+            this.button4.Location = new System.Drawing.Point(0, 117);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(244, 87);
             this.button4.TabIndex = 3;
@@ -163,7 +164,7 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Open Sans Semibold", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(649, 18);
+            this.label1.Location = new System.Drawing.Point(649, 62);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(319, 68);
             this.label1.TabIndex = 6;
@@ -173,7 +174,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Open Sans Semibold", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(414, 453);
+            this.label3.Location = new System.Drawing.Point(394, 554);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(829, 204);
             this.label3.TabIndex = 7;
@@ -186,14 +187,14 @@
             this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
             this.pictureBox1.Location = new System.Drawing.Point(229, -37);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1162, 721);
+            this.pictureBox1.Size = new System.Drawing.Size(1160, 893);
             this.pictureBox1.TabIndex = 8;
             this.pictureBox1.TabStop = false;
             // 
             // pictureBox2
             // 
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(245, 185);
+            this.pictureBox2.Location = new System.Drawing.Point(270, 227);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(373, 245);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -203,7 +204,7 @@
             // pictureBox3
             // 
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(1012, 185);
+            this.pictureBox3.Location = new System.Drawing.Point(1000, 227);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(373, 245);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -213,19 +214,30 @@
             // pictureBox4
             // 
             this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
-            this.pictureBox4.Location = new System.Drawing.Point(689, 185);
+            this.pictureBox4.Location = new System.Drawing.Point(691, 227);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(255, 245);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox4.TabIndex = 11;
             this.pictureBox4.TabStop = false;
             // 
+            // semester
+            // 
+            this.semester.AutoSize = true;
+            this.semester.Font = new System.Drawing.Font("Bebas Neue", 19F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.semester.Location = new System.Drawing.Point(279, 506);
+            this.semester.Name = "semester";
+            this.semester.Size = new System.Drawing.Size(43, 38);
+            this.semester.TabIndex = 12;
+            this.semester.Text = "aa";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(1385, 666);
+            this.ClientSize = new System.Drawing.Size(1385, 837);
+            this.Controls.Add(this.semester);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.pictureBox4);
@@ -269,6 +281,7 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.PictureBox pictureBox4;
+        private System.Windows.Forms.Label semester;
     }
 }
 
