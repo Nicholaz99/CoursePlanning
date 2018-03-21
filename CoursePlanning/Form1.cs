@@ -7,11 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
+using WMPLib;
 
 namespace Tubes2
 {
     public partial class Form1 : Form
     {
+        SoundPlayer player = new SoundPlayer("./media/bgmusicTubes.wav");
         public Form1()
         {
             InitializeComponent();
@@ -26,11 +29,10 @@ namespace Tubes2
 
         private void button3_Click(object sender, EventArgs e)
         {
+            semester.Visible = false;
             Graph g = new Graph("./input/input.txt");
             List<List<string>> sem = new List<List<string>>();
-            //Console.WriteLine("ASU EWE LONTE");
             g.topologicalSort(ref sem, "dfs");
-            //var labels = new List<Label> { semester1, semester2, semester3, semester4, semester5 };
             int it = 0;
             semester.Text = "";
             foreach (List<string> ls in sem)
@@ -85,7 +87,7 @@ namespace Tubes2
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            player.PlayLooping();
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -112,6 +114,7 @@ namespace Tubes2
 
         private void button6_Click(object sender, EventArgs e)
         {
+            semester.Visible = false;
             Graph g = new Graph("./input/input.txt");
             List<List<string>> sem = new List<List<string>>();
             g.topologicalSort(ref sem, "bfs");
@@ -128,6 +131,13 @@ namespace Tubes2
                 semester.Text = semester.Text + "\n";
                 it++;
             }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            SidePanel.Height = button7.Height;
+            SidePanel.Top = button7.Top;
+            this.Close();
         }
     }
 
@@ -162,9 +172,7 @@ namespace Tubes2
             }
 
             mat = matrix;
-
             no_of_vertex = matrix.Length;
-
             graph = new Dictionary<string, HashSet<string>>(); /* Initialize matrix to zeros */
             for (int i = 0; i < no_of_vertex; i++)
             {
@@ -443,14 +451,6 @@ namespace Tubes2
                 int timestamp = 1;
                 List<string> vertexes = new List<string>();
                 DFS(vertexNoIn(), ref listDFS, ref timestamp, ref vertexes);
-                for (int i = 0; i < vertexes.Count; i++)
-                {
-                    //form.Close();
-                    graf.FindNode(vertexes[i]).Attr.FillColor = Microsoft.Msagl.Drawing.Color.Magenta;
-                    form.Refresh();
-                    var taskwait = Task.Delay(100);
-                    taskwait.Wait();
-                }
                 listDFS.Sort(compareTuple);
 
                 Dictionary<string, bool> taken = new Dictionary<string, bool>();
@@ -462,10 +462,8 @@ namespace Tubes2
 
                 List<string> list;
                 int num_taken = 0;
-
                 while(num_taken != no_of_vertex)
                 {
-                    Console.WriteLine("asdfasdf");
                     list = new List<string>();
                     int idx = 0;
                     while (idx < listDFS.Count)
@@ -474,12 +472,15 @@ namespace Tubes2
                         {
                             list.Add(listDFS[idx].Item2);
                             string temp = listDFS[idx].Item2;
-                            for(int iasdf = 0; iasdf < listDFS.Count; iasdf++)
+                            int it = 0;
+                            while (it < listDFS.Count)
                             {
-                                if(listDFS[iasdf].Item2 == temp)
+                                if(listDFS[it].Item2 == temp)
                                 {
-                                    listDFS.RemoveAt(iasdf);
+                                    listDFS.RemoveAt(it);
+                                    it--;
                                 }
+                                it++;
                             }
                             num_taken++;
                         }
@@ -491,8 +492,6 @@ namespace Tubes2
                         {
                             break;
                         }
-
-
                     }
                     foreach(string s in list)
                     {
@@ -500,14 +499,12 @@ namespace Tubes2
                     }
                     sem.Add(list);
                 }
-
-                foreach(List<string> asdf in sem)
+                for (int i = 0; i < vertexes.Count; i++)
                 {
-                    Console.WriteLine("-----");
-                    foreach(string asdfa in asdf)
-                    {
-                        Console.WriteLine(asdfa);
-                    }
+                    graf.FindNode(vertexes[i]).Attr.FillColor = Microsoft.Msagl.Drawing.Color.Magenta;
+                    form.Refresh();
+                    var taskwait = Task.Delay(500);
+                    taskwait.Wait();
                 }
             }
             
@@ -517,14 +514,8 @@ namespace Tubes2
                 initializeVisited();
                 List<string> vertexes = new List<string>();
                 BFS(ref listBFS, ref vertexes);
-                for (int i = 0; i < vertexes.Count; i++)
-                {
-                    //form.Close();
-                    graf.FindNode(vertexes[i]).Attr.FillColor = Microsoft.Msagl.Drawing.Color.Magenta;
-                    form.Refresh();
-                    var taskwait = Task.Delay(100);
-                    taskwait.Wait();
-                }
+
+                resetGraph();
                 resetGraph();
                 Dictionary<string, bool> taken = new Dictionary<string, bool>();
 
@@ -537,7 +528,6 @@ namespace Tubes2
                 int num_taken = 0;
                 while (num_taken != no_of_vertex)
                 {
-                    Console.WriteLine("asdfasdf");
                     list = new List<string>();
                     int idx = 0;
                     while (idx < listBFS.Count)
@@ -546,12 +536,15 @@ namespace Tubes2
                         {
                             list.Add(listBFS[idx]);
                             string temp = listBFS[idx];
-                            for (int iasdf = 0; iasdf < listBFS.Count; iasdf++)
+                            int it = 0;
+                            while (it < listBFS.Count)
                             {
-                                if (listBFS[iasdf] == temp)
+                                if (listBFS[it] == temp)
                                 {
-                                    listBFS.RemoveAt(iasdf);
+                                    listBFS.RemoveAt(it);
+                                    it--;
                                 }
+                                it++;
                             }
                             num_taken++;
                         }
@@ -572,20 +565,13 @@ namespace Tubes2
                     }
                     sem.Add(list);
                 }
-                /*while (listBFS.Count != 0)
+                for (int i = 0; i < vertexes.Count; i++)
                 {
-                    t = new List<string>();
-                    while (listBFS.Count != 0 && noInEdge(listBFS[0]))
-                    {
-                        t.Add(listBFS[0]);
-                        listBFS.RemoveAt(0);
-                    }
-                    foreach (string s in t)
-                    {
-                        deleteVertex(s);
-                    }
-                    sem.Add(t);
-                }*/
+                    graf.FindNode(vertexes[i]).Attr.FillColor = Microsoft.Msagl.Drawing.Color.Magenta;
+                    form.Refresh();
+                    var taskwait = Task.Delay(500);
+                    taskwait.Wait();
+                }
             }
         }
     }

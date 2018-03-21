@@ -32,3 +32,8 @@ E:\Computer Science\Code\C++\Stima\Tubes 2\CoursePlanning\CoursePlanning\obj\Deb
 E:\Computer Science\Code\C++\Stima\Tubes 2\CoursePlanning\CoursePlanning\obj\Debug\CoursePlanning.csproj.CopyComplete
 E:\Computer Science\Code\C++\Stima\Tubes 2\CoursePlanning\CoursePlanning\obj\Debug\CoursePlanning.exe
 E:\Computer Science\Code\C++\Stima\Tubes 2\CoursePlanning\CoursePlanning\obj\Debug\CoursePlanning.pdb
+E:\Computer Science\Code\C++\Stima\Tubes 2\CoursePlanning\CoursePlanning\obj\Debug\Interop.WMPLib.dll
+E:\Computer Science\Code\C++\Stima\Tubes 2\CoursePlanning\CoursePlanning\obj\Debug\AxInterop.WMPLib.dll
+E:\Computer Science\Code\C++\Stima\Tubes 2\CoursePlanning\CoursePlanning\obj\Debug\CoursePlanning.csproj.ResolveComReference.cache
+E:\Computer Science\Code\C++\Stima\Tubes 2\CoursePlanning\CoursePlanning\bin\Debug\Interop.WMPLib.dll
+E:\Computer Science\Code\C++\Stima\Tubes 2\CoursePlanning\CoursePlanning\bin\Debug\AxInterop.WMPLib.dll
